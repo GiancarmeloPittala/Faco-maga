@@ -1,0 +1,89 @@
+body,html{
+    background-color: rgb(233, 233, 233);
+    margin: 0;
+    padding: 0;
+}
+:root{
+    --bianco : rgba(255, 255, 255, 0.938);
+    --biancoHover:rgb(4, 4, 77);
+    --nero: rgba(0,0,0,.4);
+
+}
+.centro{position:absolute; top:40%; left:50%; transform:translate(-50%, -50%);}
+
+
+header{margin-bottom: 60px;z-index: 99;display: block;display:flex; justify-content:space-around; align-content:center; padding:10px 20%;}
+header nav {position: fixed ;border-radius: 20px;background-color: rgba(83, 99, 247, 0.6); z-index: 99; top: -100%; transition: all 0.3s ease-in-out}
+header ul,#menuPrincipale div { padding: 20px; margin: 0;}
+header nav ul.nav__links { list-style:none;}
+header nav ul.nav__links li { display:inline-block; padding:2px 10px; cursor: pointer;}
+header nav ul.nav__links li a{ color:var(--bianco); font-size:20px; font-weight: bold; text-decoration: none;}
+header nav ul.nav__links li a:hover{ color:var(--biancoHover); transition:all .2s ease-in-out}
+header .menu__icon { cursor: pointer; position: fixed ; right:0; z-index: 99; transition:all .2s ease-in-out}
+header .menu__icon:hover { background-color: rgba(47, 90, 231, 0.3); border-radius:50%}
+header .menu__icon span { display: block; margin-bottom: 5px; width: 50px;height: 5px; background-color: var(--nero)}
+
+.riempi{height: 1000px; }
+table > th { vertical-align: middle}
+
+.vcenter {
+    display: inline-block;
+    vertical-align: middle;
+    float: none;
+    line-height: 50px;
+    width:200px;
+}
+#check {
+    width: 25px;
+    height: 25px;
+    }
+
+    table tbody tr[role = row] td{
+             -webkit-column-width: 1.11vw;
+             -moz-column-width: 11.11vw;
+             column-width: 11.11vw;
+             overflow-X: hidden;
+
+              }
+              
+
+#formRicerca input[type="submit"]{float: right; margin:5px 10px;}
+#formRicerca input{border:none;}
+#formRicerca input[type="text"]:focus{ background-color: azure; transition: 0.5s ease-in-out ;}
+
+#gestioneArticoli #ricercaEsatta,
+#gestioneArticoli #ricercaParziale { background:none; border:none; width: 30px; height: 30px;margin: auto 1px; }
+
+#gestioneArticoli #ricercaEsatta:hover,
+#gestioneArticoli #ricercaParziale:hover{ background: #1111}
+
+#ricercaEsatta:before {
+    font-family: "Font Awesome 5 Free";
+    content: "\f002";
+    font-weight:bold;
+    color:rgba(200, 0, 66, .6);
+}
+#ricercaParziale:before {
+    font-family: "Font Awesome 5 Free";
+    content: "\f00e";
+    font-weight:bold;
+    color:rgba(66, 107, 200, .6);
+}
+
+.loader {
+    position: absolute;
+    background-image: url(../img/varie/loader.gif);
+    background-size: contain;
+    background-position: center center;
+    background-repeat: no-repeat;
+    width: 200px;
+    height: 200px;
+    left:50%;
+    top:50%;
+    transform: translate(-50%, -50%);
+    z-index: 99;
+    display: none;
+}
+#cambioCodArt { position: fixed; top:50%; left:50%; transform: translate(-50%,-50%)}
+.separatore { background-color: rgba(200,200,200,.5);width: 100%; text-align: center; position: relative; padding: 5px 0; border: none; border-radius: 10px }
+.separatore h1 {font-weight: bold} 

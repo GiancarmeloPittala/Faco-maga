@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>xdialog: Javascript Dialogs</title>
+    <link rel="shortcut icon" href="images/d.ico" type="image/x-icon">
+    <link rel="stylesheet" href="lib/highlight/default.min.css">
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="xdialog.css">
+</head>
+
+<body>
+    <div class="xd-container">
+        <header>
+            <h1 class="title-text">A Simple Javascript Dialog Library: xdialog</h1>
+            <div class="links">
+                <a class="hover-shadow" aria-label="view xdialog on github" title="view xdialog on github" href="https://github.com/xxjapp/xdialog">
+                    <div class="fa-icon"><i class="fab fa-github"></i></div>github
+                </a>
+                <a class="hover-shadow" aria-label="download xdialog" title="download xdialog" href="https://github.com/xxjapp/xdialog/releases/latest">
+                    <div class="fa-icon"><i class="fas fa-cloud-download-alt"></i></div>download
+                </a>
+                <a class="hover-shadow" aria-label="xdialog documentation" title="xdialog documentation" href="https://xxjapp.github.io/xdialog/readme">
+                    <div class="fa-icon"><i class="fas fa-book"></i></div>documentation
+                </a>
+            </div>
+        </header>
+        <div class="main">
+            <div class="section title-text">Demos</div>
+            <div>
+                <button data-method="xdialogDemo1" class="hover-shadow button-demo-source">demo 01 source</button>
+                <button data-method="xdialogDemo1" class="hover-shadow button-demo">demo 01 - login dialog</button>
+            </div>
+            <div>
+                <button data-method="xdialogDemo2" class="hover-shadow button-demo-source">demo 02 source</button>
+                <button data-method="xdialogDemo2" class="hover-shadow button-demo">demo 02 - dialog with iframe</button>
+            </div>
+            <div>
+                <button data-method="xdialogDemo3" class="hover-shadow button-demo-source">demo 03 source</button>
+                <button data-method="xdialogDemo3" class="hover-shadow button-demo">demo 03 - callback parameters</button>
+            </div>
+            <div>
+                <button data-method="xdialogDemo4" class="hover-shadow button-demo-source">demo 04 source</button>
+                <button data-method="xdialogDemo4" class="hover-shadow button-demo">demo 04 - inputs</button>
+            </div>
+            <div>
+                <button data-method="xdialogDemo5" class="hover-shadow button-demo-source">demo 05 source</button>
+                <button data-method="xdialogDemo5" class="hover-shadow button-demo">demo 05 - cdn</button>
+            </div>
+            <div>
+                <button data-method="xdialogDemo6" class="hover-shadow button-demo-source">demo 06 source</button>
+                <button data-method="xdialogDemo6" class="hover-shadow button-demo">demo 06 - inline</button>
+                <div style="display: none;">
+                    <div id="demo6-content">
+                        <h3>Hello!</h3>
+                        <p>You are so great!</p>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <button data-method="xdialogDemo7" class="hover-shadow button-demo-source">demo 07 source</button>
+                <button data-method="xdialogDemo7" class="hover-shadow button-demo">demo 07 - very wide content</button>
+            </div>
+            <div>
+                <button data-method="xdialogDemo8" class="hover-shadow button-demo-source">demo 08 source</button>
+                <button data-method="xdialogDemo8" class="hover-shadow button-demo">demo 08 - very high content</button>
+            </div>
+            <div class="section title-text">Effects</div>
+            <div>
+                <button class="xd-trigger hover-shadow" data-effect="">No Effect</button>
+                <button class="xd-trigger hover-shadow" data-effect="fade_in_and_scale">Fade in & Scale</button>
+                <button class="xd-trigger hover-shadow" data-effect="slide_in_right">Slide in (right)</button>
+                <button class="xd-trigger hover-shadow" data-effect="slide_in_bottom">Slide in (bottom)</button>
+                <button class="xd-trigger hover-shadow" data-effect="newspaper">Newspaper</button>
+                <button class="xd-trigger hover-shadow" data-effect="fall">Fall</button>
+                <button class="xd-trigger hover-shadow" data-effect="side_fall">Side Fall</button>
+                <button class="xd-trigger hover-shadow" data-effect="sticky_up">Sticky Up</button>
+                <button class="xd-trigger hover-shadow" data-effect="3d_flip_horizontal">3D Flip (horizontal)</button>
+                <button class="xd-trigger hover-shadow" data-effect="3d_flip_vertical">3D Flip (vertical)</button>
+                <button class="xd-trigger hover-shadow" data-effect="3d_sign">3D Sign</button>
+                <button class="xd-trigger hover-shadow" data-effect="super_scaled">Super Scaled</button>
+                <button class="xd-trigger hover-shadow" data-effect="just_me">Just Me</button>
+                <button class="xd-trigger hover-shadow" data-effect="3d_slit">3D Slit</button>
+                <button class="xd-trigger hover-shadow" data-effect="3d_rotate_bottom">3D Rotate Bottom</button>
+                <button class="xd-trigger hover-shadow" data-effect="3d_rotate_in_left">3D Rotate In Left</button>
+                <button class="xd-trigger hover-shadow" data-effect="blur">Blur (no IE)</button>
+                <button class="xd-trigger hover-shadow" data-effect="let_me_in">Let me in</button>
+                <button class="xd-trigger hover-shadow" data-effect="make_way">Make way!</button>
+                <button class="xd-trigger hover-shadow" data-effect="slip_from_top">Slip from top</button>
+            </div>
+            <div class="section title-text">Spin Utility</div>
+            <div>
+                <button class="hover-shadow" id="button-spin">Start & stop spin</button>
+            </div>
+        </div>
+    </div>
+    <!-- /xd-container -->
+
+    <script src="lib/highlight/highlight.min.js"></script>
+    <script src="lib/clipboard/clipboard.min.js"></script>
+    <script src="lib/fontawesome/all.min.js"></script>
+    <script src="xdialog.js"></script>
+    <script src="js/index.js"></script>
+</body>
+
+</html>
