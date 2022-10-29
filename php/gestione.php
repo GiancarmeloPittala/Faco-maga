@@ -159,10 +159,10 @@ $result = $conn->query("select * from 01_anaart where codart = \"".$codArt."\"")
             $qtamov =(double)((double)$qta - $progressivo);
             $net = $qtamov * (double)$prezzo;
             /*MOV MAG*/
-            $sql = "UPDATE 01_anaatt19 SET numarm = numarm + 1 where COD = '26120'";
+            $sql = "UPDATE 01_anaatt$anno SET numarm = numarm + 1 where COD = '26120'";
             $conn->query($sql) or die("ERRORE : ".$conn->error." ".$sql);//incremento il numarm
 
-            $result = $conn->query("SELECT last_insert_id(numarm) as numarm from 01_anaatt19 where COD = '26120'") or die("ERRORE : ".$conn->error);//prelevo numarm
+            $result = $conn->query("SELECT last_insert_id(numarm) as numarm from 01_anaatt$anno where COD = '26120'") or die("ERRORE : ".$conn->error);//prelevo numarm
             $row = $result->fetch_assoc();
             $artmag = (string)$row['numarm'];
             echo "art mag => $artmag ";
