@@ -45,9 +45,10 @@ if (document.getElementById("CODART").value.trim() == "")
   }
 
   let prodottoEsistente = (dati) =>{
+    let anno = String(new Date().getFullYear()).substring(2,4);
     /*prendo se esistono La quantità , il magazzino e l'ultimo prezzo d'acquisto*/
-    let sql = "SELECT (select (NET/QTA) from 01_movmag19 as M LEFT join 01_caumag AS c ON C.COD = M.CODCAU where codart ='"+codartV+"' and M.coddep ='"+magazzino+"' and SUBSTRING(C.test,1,1) = '1' order by artmag DESC limit 1 )AS VALOR ";
-        sql+= ",CODDEP,SUBSTRING(PROGR,1,12)AS PROGR FROM 01_conart19 where CODART ='"+codartV+"' ";
+    let sql = `SELECT (select (NET/QTA) from 01_movmag${anno} as M LEFT join 01_caumag AS c ON C.COD = M.CODCAU where codart ='"+codartV+"' and M.coddep ='"+magazzino+"' and SUBSTRING(C.test,1,1) = '1' order by artmag DESC limit 1 )AS VALOR `;
+        sql+= `,CODDEP,SUBSTRING(PROGR,1,12)AS PROGR FROM 01_conar${anno} where CODART ='"+codartV+"' `;
     query(sql).done(valori => {
       if(valori.length == 0)//prodotto che è stato registrato nell'anagrafica ma mai movimentato
       {
@@ -126,9 +127,9 @@ const ricerca_per_cod_articolo = () => {
 
     let prodottoEsistente = (dati) =>{
       /*prendo se esistono La quantità , il magazzino e l'ultimo prezzo d'acquisto*/
-      console.log(dati.codart);
-      let sql = "SELECT (select (NET/QTA) from 01_movmag19 as M LEFT join 01_caumag AS c ON C.COD = M.CODCAU where codart ='"+codartV+"' and M.coddep ='"+magazzino+"' and SUBSTRING(C.test,1,1) = '1' order by artmag DESC limit 1 )AS VALOR ";
-          sql+= ",CODDEP,SUBSTRING(PROGR,1,12)AS PROGR FROM 01_conart19 where CODART ='"+codartV+"' ";
+      let anno = String(new Date().getFullYear()).substring(2,4)
+      let sql = `SELECT (select (NET/QTA) from 01_movmag${anno} as M LEFT join 01_caumag AS c ON C.COD = M.CODCAU where codart ='"+codartV+"' and M.coddep ='"+magazzino+"' and SUBSTRING(C.test,1,1) = '1' order by artmag DESC limit 1 )AS VALOR `;
+          sql+= `,CODDEP,SUBSTRING(PROGR,1,12)AS PROGR FROM 01_conart${anno} where CODART ='"+codartV+"' `;
       query(sql).done(valori => {
         if(valori.length == 0)//prodotto che è stato registrato nell'anagrafica ma mai movimentato
         {
@@ -365,8 +366,9 @@ function aggiornaCampiForm(rigoDB)
      op.style.fontWeight="normal"
     if(op.value == rigoDB['CODDEP']) op.selected = true;//il magazzino passato lo metto selected
     });
+    let anno = String(new Date().getFullYear()).substring(2,4)
     /*Prendo tutti i magazzini in cui è presente questo prodotto*/
-    query("SELECT CODDEP from 01_conart19 where codart ='"+rigoDB['CODART']+"' ").done(function (data){
+    query(`SELECT CODDEP from 01_conart${anno} where codart ='"+rigoDB['CODART']+"' `).done(function (data){
       if(data.length > 0) {
         data = JSON.parse(data);
           data.forEach(function(value){//per ogni valore preso da database
@@ -491,13 +493,14 @@ function generaOption(...id){//richiamato al onload del body
 
 const cambiaMagazzino = (obj) =>{
   let codart = document.getElementById('CODART').value;
+  let anno = String(new Date().getFullYear()).substring(2,4)
   if(codart.trim() != "")
   {
     let mag = document.getElementById("Magazzino")[obj.selectedIndex].innerHTML || "";
     let magV = document.getElementById("Magazzino")[obj.selectedIndex].value;
     let sql ="SELECT SUBSTRING(PROGR,1,12) AS PROGR,";
-        sql +=" (select (NET/QTA) from 01_movmag19 as M LEFT join 01_caumag AS c ON C.COD = M.CODCAU where codart ='"+codart+"' and M.coddep ='"+magV+"' and SUBSTRING(C.test,1,1) = '1' order by artmag DESC limit 1 )AS VALOR";
-        sql +=" FROM 01_conart19 WHERE codart = '"+codart+"' AND CODDEP ='"+magV+"' "; 
+        sql +=`(select (NET/QTA) from 01_movmag${anno} as M LEFT join 01_caumag AS c ON C.COD = M.CODCAU where codart ='${codart}' and M.coddep ='${magV}' and SUBSTRING(C.test,1,1) = '1' order by artmag DESC limit 1 )AS VALOR`;
+        sql +=` FROM 01_conart${anno} WHERE codart = '"+codart+"' AND CODDEP ='${magV}' `; 
   
     query(sql).done(function( msg,status ) {
       if(msg.length > 0)

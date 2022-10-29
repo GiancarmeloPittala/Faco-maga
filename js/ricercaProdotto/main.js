@@ -1,4 +1,5 @@
   $(function(){
+    let anno = String(new Date().getFullYear()).substring(2,4)
     $("#codart, #codmaster, #codbar, #Desc, #Cat").on("change", function(){
       let valore = "";  
       if($(this).val() != "" && $(this).val() !=" ")
@@ -7,7 +8,7 @@
           let query;
           query = "SELECT A.CODART,A.ARTMAS,D.DESCR AS CAT,A.DESC1,A.PRE1,A.PRE5,SUBSTRING(C.PROGR,1,12) AS QTA,AE.EAN, ((pre1/pre5*100)-100)AS RICARICO FROM 01_anaart AS A ";
           query +="LEFT JOIN 01_desvar AS D ON A.CATMER = D.COD and tipo ='M' ";
-          query +="LEFT JOIN 01_conart19 AS C ON A.CODART = C.CODART and CODDEP ='3' ";
+          query +=`LEFT JOIN 01_conart${anno} AS C ON A.CODART = C.CODART and CODDEP ='3' `;
           query +="LEFT JOIN 01_anaarte AS AE ON A.ID = AE.IDANAART ";
   
           if($(this).attr('id') == "codart")

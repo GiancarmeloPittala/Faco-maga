@@ -171,13 +171,13 @@ class Ricerca {
         extra += `AND ${this.controlloPrezzo(prezzo,tipoPrezzo)}`;
 
         document.querySelector(".loader").style.display = "block";
-
+    let anno = String(new Date().getFullYear()).substring(2,4)
     let sql = `SELECT A.CODART, AE.EAN AS CODBAR, A.DESC1, A.UNIMIS, A.PRE1 ,A.PRE2, A.PRE3, A.PRE4, A.PRE5, A.ARTMAS, A.INGR, A.TIPPRE, `;
         sql += `l1.DESCR AS l1, L2.DESCR AS l2, L3.DESCR AS l3, L4.DESCR AS l4, L5.DESCR AS l5, `;
         sql += `scoCli.DESCR AS codscocli, scoForn.DESCR AS codscofornit, `;
         sql += `C.CODDEP, SUBSTRING(C.PROGR,1,12) AS PROGR, ((A.pre1/A.pre5*100)-100) AS RICARICO `;
         sql += `FROM 01_anaart AS A `;
-        sql += `LEFT JOIN 01_conart19 AS C ON A.CODART = C.CODART ${coddep} `;
+        sql += `LEFT JOIN 01_conart${anno} AS C ON A.CODART = C.CODART ${coddep} `;
         sql += `LEFT JOIN 01_anaarte AS AE ON A.id = AE.idanaart `;
         sql += `LEFT JOIN 01_desvar AS L1 ON A.CATMER = L1.COD AND L1.TIPO = 'M' `;
         sql += `LEFT JOIN 01_desvar AS L2 ON A.TIPPRO = L2.COD AND L2.TIPO = 'X' `;
