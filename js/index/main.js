@@ -125,15 +125,25 @@ const ricerca_per_cod_articolo = () => {
 
     }
 
-    let prodottoEsistente = (dati) =>{
+    let prodottoEsistente = async (dati) =>{
       /*prendo se esistono La quantità , il magazzino e l'ultimo prezzo d'acquisto*/
+
       let anno = String(new Date().getFullYear()).substring(2,4)
-      let sql = `SELECT (select (NET/QTA) from 01_movmag${anno} as M LEFT join 01_caumag AS c ON C.COD = M.CODCAU where codart ='"+codartV+"' and M.coddep ='"+magazzino+"' and SUBSTRING(C.test,1,1) = '1' order by artmag DESC limit 1 )AS VALOR `;
-          sql+= `,CODDEP,SUBSTRING(PROGR,1,12)AS PROGR FROM 01_conart${anno} where CODART ='"+codartV+"' `;
+
+      let sql = `select (NET/QTA) AS VALOR from 01_movmag${anno} as M LEFT join 01_caumag AS c ON C.COD = M.CODCAU where 
+      codart ='${codartV}' and M.coddep ='${magazzino}' and SUBSTRING(C.test,1,1) = '1' order by artmag DESC limit 1  `;
+      
+      const results = await query(`SELECT MOVMAG.CODART,anaart.desc1,anaart.desc2,anaart.unimis,desvar.descr AS DESUNIMIS,SUM(QTA*CONVERT(CONCAT(SubStr(CAUMAG.TEST,4,1),'1'),SIGNED)) as PROGR, SUM(NET*CONVERT(CONCAT(SubStr(CAUMAG.TEST,4,1),'1'),SIGNED)) as NET,ANAART.PRE1,MOVMAG.CODDEP FROM 01_movmag${anno} as MOVMAG Left join 01_caumag as CAUMAG on CAUMAG.COD=MOVMAG.CODCAU Left join 01_anaart as anaart on anaart.CODART=MOVMAG.CODART Left join 01_desvar as desvar on DESVAR.TIPO='U' and anaart.unimis = desvar.COD WHERE SubStr(CAUMAG.TEST, 4, 1) != '' AND ANAART.valmag is not null and ANAART.VALMAG != 'N' and movmag.CODDEP='${magazzino}' AND movmag.codart='${codartV}' GROUP BY CODDEP,CODART ORDER BY CODDEP,CODART`);
+
+      console.log( results )
+      const { CODDEP, PROGR } = results ?? {};
+
+
       query(sql).done(valori => {
         if(valori.length == 0)//prodotto che è stato registrato nell'anagrafica ma mai movimentato
         {
-          aggiornaCampiForm(dati[0]);
+          console.log( { ... dati[0], PROGR, CODDEP } )
+          aggiornaCampiForm({ ... dati[0], PROGR, CODDEP });
           $('#alertCentrale').removeClass('alert-dark');
           $('#alertCentrale').removeClass('alert-danger');
           $('#alertCentrale').addClass('alert-success');
@@ -368,7 +378,7 @@ function aggiornaCampiForm(rigoDB)
     });
     let anno = String(new Date().getFullYear()).substring(2,4)
     /*Prendo tutti i magazzini in cui è presente questo prodotto*/
-    query(`SELECT CODDEP from 01_conart${anno} where codart ='"+rigoDB['CODART']+"' `).done(function (data){
+    query(`SELECT CODDEP from 01_conart${anno} where codart ='${rigoDB['CODART']}' `).done(function (data){
       if(data.length > 0) {
         data = JSON.parse(data);
           data.forEach(function(value){//per ogni valore preso da database

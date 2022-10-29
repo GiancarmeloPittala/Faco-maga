@@ -134,12 +134,12 @@ error_reporting(E_ALL);
               </div>
 
               <div class="col-4 col-md-4 col-lg-2 mb-3 input-group">
-              <div class="input-group-prepend">
+                <div class="input-group-prepend">
                   <span class="input-group-text text-center" id="inputGroupPrepend2" >Mag.</span>
                 </div>
                 <select class="custom-select" name="magazzino" id="Magazzino" required>
-                <option value="">Nessun magazzino selezionato</option>
-                  <?php include './php/sectionMag.php'?>
+                  <option value="">Nessun magazzino selezionato</option>
+                  <?php  include './php/sectionMag.php'?>
                 </select>
               </div>
             </div>

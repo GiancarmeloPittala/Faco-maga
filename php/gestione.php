@@ -120,10 +120,14 @@ $result = $conn->query("select * from 01_anaart where codart = \"".$codArt."\"")
         $conn->query($sql) or die("ERRORE : ".$conn->error." ".$sql);
 
     }
-    $sql = "SELECT PROGR FROM 01_conart$anno where codart ='$codArt' AND CODDEP ='$mag' ";
+
+    $sql = "SELECT MOVMAG.CODART,anaart.desc1,anaart.desc2,anaart.unimis,desvar.descr AS DESUNIMIS,SUM(QTA*CONVERT(CONCAT(SubStr(CAUMAG.TEST,4,1),'1'),SIGNED)) as QTA, SUM(NET*CONVERT(CONCAT(SubStr(CAUMAG.TEST,4,1),'1'),SIGNED)) as NET,ANAART.PRE1,MOVMAG.CODDEP FROM 01_movmag$anno as MOVMAG Left join 01_caumag as CAUMAG on CAUMAG.COD=MOVMAG.CODCAU Left join 01_anaart as anaart on anaart.CODART=MOVMAG.CODART Left join 01_desvar as desvar on DESVAR.TIPO='U' and anaart.unimis = desvar.COD WHERE SubStr(CAUMAG.TEST, 4, 1) != '' AND ANAART.valmag is not null and ANAART.VALMAG != 'N' and movmag.CODDEP='$mag' AND movmag.codart='$codArt' GROUP BY CODDEP,CODART ORDER BY CODDEP,CODART";
+    
+    echo $sql;
+
     $result = $conn->query($sql) or die("ERRORE : ".$conn->error." ". $sql);//controllo se la quantità inserita è uguale a quella nel db
     $row = $result->fetch_assoc();
-    $qtaProdotto = (double)$row['PROGR'];
+    $qtaProdotto = (double)$row['QTA'] ?? 0;
     if(!(isset($_POST['check'])) && !($qtaProdotto == $qta) )//true quando non si vuole memorizzare mov mag false quando si vuole farlo
         {
             /*Prendo il progressivo di quel prodotto*/
@@ -131,43 +135,12 @@ $result = $conn->query("select * from 01_anaart where codart = \"".$codArt."\"")
             $result = $conn->query($q) or die("ERRORE : ".$conn->error." ".$q);
             $row = $result->fetch_assoc();
             $progressivo = ( ($result->num_rows == 0) ? $progressivo = 0 : $progressivo = (double)$row['PROGR']);//se non esiste metto 0 se no metto il progressivo del prodotto
-            if($result->num_rows == 0)//se non è presente la quantità NEL MAGAZZINO SELEZIONATO
-            {
-                /*inserisco la quantita del prodotto*/
-                $progConSpazi = str_pad( (string) $qta , 12,' ',STR_PAD_LEFT);
-                $valor = str_pad( (string) $prezzo , 24,' ',STR_PAD_LEFT);
-                $sql = "INSERT INTO 01_conart$anno(CODDEP,CODART,PROGR,VALOR) VALUES ('$mag', \"".(string)$codArt."\", '".$progConSpazi."', '".$valor."')";
-                $result = $conn->query($sql) or die("ERRORE : ".$conn->error." ".$sql);
-            }
-            else //se presente faccio un update
-            { 
-                $p = str_pad( (string) $qta , 12,' ',STR_PAD_LEFT);    
-                $v = str_pad( (string) $prezzo , 12,' ',STR_PAD_LEFT);    
-                
-                $sql = "SELECT PROGR,VALOR FROM 01_conart$anno WHERE CODDEP='$mag' AND CODART='".(string)$codArt."'";
-                $result = $conn->query($sql) or die("ERRORE : ".$conn->error." ".$sql);
-                $row = $result->fetch_assoc();
-                $PROGR = $row['PROGR'];
-                $PROGR = $p.substr($row['PROGR'],12);//i primi 12 progr e il resto lo copio dal db
-                $VALOR = $row['VALOR'];
-                $VALOR = substr($row['VALOR'],0,12).$v.substr($row['VALOR'],24);
-
-                $sql = "UPDATE 01_conart$anno SET PROGR='".$PROGR."',VALOR='".$VALOR."'  WHERE CODDEP='$mag' AND CODART='".(string)$codArt."'";
-                $result = $conn->query($sql) or die("ERRORE : ".$conn->error." ".$sql);
-            }
             
             $qtamov =(double)((double)$qta - $progressivo);
             $net = $qtamov * (double)$prezzo;
-            /*MOV MAG*/
-            $sql = "UPDATE 01_anaatt$anno SET numarm = numarm + 1 where COD = '26120'";
-            $conn->query($sql) or die("ERRORE : ".$conn->error." ".$sql);//incremento il numarm
-
-            $result = $conn->query("SELECT last_insert_id(numarm) as numarm from 01_anaatt$anno where COD = '26120'") or die("ERRORE : ".$conn->error);//prelevo numarm
-            $row = $result->fetch_assoc();
-            $artmag = (string)$row['numarm'];
-            echo "art mag => $artmag ";
+            $data = date("Y-m-d");
             
-            $sql = "Insert into 01_movmag$anno(CODART,QTA,LOR,NET,DESCMO,ARTMAG,DATREG,CODDEP,CODCAU,CASC,UTENTE) VALUES (\"".(string)$codArt."\", ".$qtamov.",".$net.",".$net.", \"".(string)$desc."\",".$artmag.",'".$data."','$mag',\"".$rim_ret."\",\"C\",\"00\")";
+            $sql = "Insert into 01_movmag$anno(CODART,QTA,LOR,NET,DESCMO,DATREG,CODDEP,CODCAU,CASC,UTENTE) VALUES (\"".(string)$codArt."\", ".$qtamov.",".$net.",".$net.", \"".(string)$desc."\",'".$data."','$mag',\"".$rim_ret."\",\"C\",\"00\")";
             $result = $conn->query($sql) or die("ERRORE : ".$conn->error." ".$sql);
 
         }
