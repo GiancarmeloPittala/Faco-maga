@@ -1,0 +1,38 @@
+.w-6{
+  width: 20px;
+}
+.h-6{
+  height: 20px;
+}
+
+.cursor-pointer{
+  cursor: pointer;
+}
+
+input::placeholder{
+  color: var(--ash-gray) !important
+}
+input, select{
+  color: white !important;
+  background-color: transparent !important;
+}
+
+select > option {
+  background: var(--dark-slate-gray);
+}
+
+.rounded-lg{
+  border-radius: 20px;
+}
+
+.form-control:focus{border-color: var(--hookers-green);  box-shadow: none; -webkit-box-shadow: none;} 
+.has-error .form-control:focus{box-shadow: none; -webkit-box-shadow: none;}
+
+
+.border-l-0{
+  border-left: none;
+}
+
+.input-group{
+  padding: 0;
+}

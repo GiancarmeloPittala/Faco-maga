@@ -1,0 +1,24 @@
+:root{
+  /* CSS HEX */
+--ash-gray: #cad2c5ff;
+--dark-sea-green: #84a98cff;
+--hookers-green: #52796fff;
+--dark-slate-gray: #354f52ff;
+--charcoal: #2f3e46ff;
+
+/* CSS HSL */
+--ash-gray: hsla(97, 13%, 80%, 1);
+--dark-sea-green: hsla(133, 18%, 59%, 1);
+--hookers-green: hsla(165, 19%, 40%, 1);
+--dark-slate-gray: hsla(186, 21%, 26%, 1);
+--charcoal: hsla(201, 20%, 23%, 1);
+}
+
+body {
+  background-color: var(--ash-gray);
+}
+
+.bg-dark-sea-green{
+  background-color: var(--dark-sea-green);
+}
+
