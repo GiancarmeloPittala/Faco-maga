@@ -13,7 +13,7 @@
             </select>
           </div>
         </div>
-        <div class="modal-footer">
+        <div class="modal-footer" onclick="modalSelectMagazzino.toggle();">
           <button type="button" class="btn btn-outline-light">Seleziona</button>
         </div>
       </div>
@@ -29,7 +29,10 @@
   })
 
   const modalSelectMagazzinoEl = document.getElementById('modalSelectMagazzino')
-  modalSelectMagazzino.toggle()
+  const coddep =  window.localStorage.getItem('coddep');
+ 
+  if ( coddep == null || coddep == '' )
+    modalSelectMagazzino.toggle()
 
   modalSelectMagazzinoEl.addEventListener('hidden.bs.modal', event => {
     const selected = document.getElementById('maga')

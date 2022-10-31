@@ -21,7 +21,15 @@ body {
 .bg-dark-sea-green{
   background-color: var(--dark-sea-green);
 }
-
+.btn.btn-outline-dark-sea-green{
+  border-color: var(--dark-sea-green) !important;
+  color: var(--dark-sea-green) !important;
+}
+.btn.btn-outline-dark-sea-green:hover{
+  border-color: var(--dark-sea-green) !important;
+  background-color: var(--dark-sea-green) !important;
+  color: white !important;
+}
 .text-ash-gray{
   color: var(--ash-gray);
 }

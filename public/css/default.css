@@ -8,6 +8,11 @@
   height: 20px;
 }
 
+body{
+  background: url("../img/logo/logo_transparent.png") 200px left center no-repeat;
+}
+
+
 .cursor-pointer{
   cursor: pointer;
 }

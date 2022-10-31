@@ -1,5 +1,10 @@
-<form autocomplete="off" id="searchForm" class="w-100 bg-dark-sea-green rounded-lg p-4 p-lg-5 needs-validation" novalidate>
-  <div>
+<form autocomplete="off" id="searchForm" class="w-100 needs-validation" novalidate>
+  <div class="d-flex justify-content-end px-4 px-lg-5 pb-2">
+    <button onclick="modalSelectMagazzino.toggle();" data-bs-title="Cambia magazzino" data-bs-toggle="tooltip" data-bs-placement="top" title="Cambia magazzino"  class="btn btn-outline-dark-sea-green s">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path></svg>
+    </button>
+  </div>
+  <div class="bg-dark-sea-green rounded-lg p-4 p-lg-5">
     <div class="mb-2 text-ash-gray">
       Ricerca per 
       <span class=" text-white font-weight-bolder" id="campoRicerca"></span> 
@@ -40,6 +45,8 @@
 
 <script type="module">
   let article = {};
+
+
 
   import {
     keyName,
@@ -150,6 +157,7 @@
   }
   // Example starter JavaScript for disabling form submissions if there are invalid fields
   (() => {
+  
     'use strict'
     const searchForm = new SearchForm()
     searchForm
