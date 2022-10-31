@@ -146,21 +146,21 @@ error_reporting(E_ALL);
             
             <div class="form-row"><!--codici sconto e magazzino e unità di misura-->
               <div class="col-6 col-md-5 col-lg-5 mb-3" >
-                <label for="Cod_Master">Sconto Cliente</label>
+                <label for="codscoCli">Sconto Cliente</label>
                 <select class="custom-select" name="codscoCli" id="codscoCli" >
                   <option value="">Nessun codice sconto cliente</option>
                 </select>
               </div>
 
               <div class="col-6 col-md-5 col-lg-5 mb-3" >
-                <label for="Cod_Master">Sconto fornitore</label>
+                <label for="codscoFornit">Sconto fornitore</label>
                 <select class="custom-select" name="codscoFornit" id="codscoFornit" >
                   <option value="">Nessun codice sconto fornitore</option>
                 </select>
               </div>
 
               <div class="col-12 col-md-2 col-lg-2 mb-3" >
-              <label for="Cod_Master">Unit. Misura</label>
+              <label for="unimis">Unit. Misura</label>
                 <select class="custom-select" name="unimis" id="unimis" required>
                   <option value="">Nessuna unità di misura</option>
                 </select>

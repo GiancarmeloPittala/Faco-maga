@@ -1,5 +1,5 @@
-<?php 
-
-echo date("Y-m-d");
+<?php
+echo getenv('DB_HOST', false);
+var_dump($_ENV)
 
 ?>
