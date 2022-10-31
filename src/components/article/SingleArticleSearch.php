@@ -18,7 +18,7 @@
         <li class="dropdown-item cursor-pointer" value="a.ARTMAS" >Cod. master</li>
         <li class="dropdown-item cursor-pointer" value="a.DESC1" >Descrizione breve</li>
       </ul>
-      <button type="button" class="btn btn-outline-light dropdown-toggle-split border-l-0" data-bs-toggle="dropdown" aria-expanded="false">
+      <button type="button" class="btn btn-outline-light dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path>
         </svg>

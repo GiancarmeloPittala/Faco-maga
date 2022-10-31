@@ -1,10 +1,13 @@
-<form id="articleForm" class="w-100 bg-dark-sea-green rounded-lg p-4 p-lg-5" autocomplete="off">
+<form id="articleForm" class="w-100 bg-dark-sea-green rounded-lg p-4 p-lg-5 needs-validation" novalidate autocomplete="off">
 
   <!-- Primo rigo -->
   <div class="row gap-4">
     <div class="col-md input-group">
       <label data-bs-title="Codice articolo" data-bs-toggle="tooltip" data-bs-placement="top" title="Codice articolo" for="codArticolo" type="button" class="btn btn-outline-light">Cod. Articolo</label>
-      <input id="codArticolo" type="text" class="form-control " aria-label="Text input with segmented dropdown button">
+      <input id="codArticolo" required type="text" class="form-control " aria-label="Text input with segmented dropdown button">
+      <div class="valid-feedback">
+        Looks good!
+      </div>
     </div>
     <div class="col-md input-group">
       <label data-bs-title="Il codice master è una stringa che identifica il gruppo di appartenenza del prodotto" data-bs-toggle="tooltip" data-bs-placement="top" title="Il codice master è una stringa che identifica il gruppo di appartenenza del prodotto" for="codMaster" type="button" class="btn btn-outline-light">Cod. Master</label>
@@ -84,7 +87,7 @@
   <div class="row mt-4 gap-4">
     <div class="col-lg input-group">
       <label data-bs-title="Prezzo 1" data-bs-toggle="tooltip" data-bs-placement="top" title="Prezzo 1" for="pre1" type="button" class="btn btn-outline-light">Prezzo 1</label>
-      <input id="pre1" type="number" step="0.01" class="form-control" aria-label="Prezzo 1">
+      <input required id="pre1" type="number" step="0.01" class="form-control" aria-label="Prezzo 1">
     </div>
     <div class="col-lg input-group">
       <label data-bs-title="Prezzo 2" data-bs-toggle="tooltip" data-bs-placement="top" title="Prezzo 2" for="pre2" type="button" class="btn btn-outline-light">Prezzo 2</label>
@@ -135,7 +138,8 @@
     initCategorieL4,
     initCategorieL5,
     initUnitMis,
-    initMaga
+    initMaga,
+    toast
   } from './src/js/index.js';
 
   const codscoCli = document.getElementById('codscoCli');
@@ -174,8 +178,11 @@
       event.preventDefault();
       event.stopPropagation();
 
+      
+      articleForm.classList.add('was-validated')
       // se non è valido ritorno 
       if (!articleForm.checkValidity()) return;
+
       
       const form = document.querySelectorAll('input, select ');
       let valuesForm = Object.fromEntries( form.entries() );
@@ -187,11 +194,24 @@
         else values[input.id] = input.value;
       }
       
-      const result = await (await fetch('src/php/gestione.php', { 
-        method: 'POST', 
-        headers: { 'Content-Type': 'application/json'}, 
-        body: JSON.stringify( { ...values, maga: window.localStorage.getItem('coddep')  }) 
-      })).json()
+      try {
+        const res = await fetch('src/php/gestione.php', { 
+          method: 'POST', 
+          headers: { 'Content-Type': 'application/json'}, 
+          body: JSON.stringify( { ...values, maga: window.localStorage.getItem('coddep')  }) 
+        })
+
+        const result = await res.json();
+        if (res.status >= 300 ) throw result;
+      
+        articleForm.reset()
+        articleForm.classList.remove('was-validated')
+        toast.success(result.msg)
+
+      } catch (error) {
+        console.log( error )
+        toast.error(error.msg ?? error.message)
+      }
 
     }
   })()

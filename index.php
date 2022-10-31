@@ -8,6 +8,9 @@
   <script src="public/js/bootstrap.bundle.min.js"></script>
   <link rel="stylesheet" href="public/css/main.css">
 
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+  
   <link rel="apple-touch-icon" sizes="180x180" href="public/img/icon/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="public/img/icon/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="public/img/icon/favicon-16x16.png">
@@ -24,7 +27,7 @@
         </div>
         <?php include_once './src/components/article/SingleArticleSearch.php' ?>
         <?php include_once './src/components/article/SingleArticleForm.php' ?>
-        <?php // include_once './src/components/article/InitialModalSelezioneMagazzino.php' ?>
+        <?php include_once './src/components/article/InitialModalSelezioneMagazzino.php' ?>
       </div>
     </main>
 

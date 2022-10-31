@@ -28,7 +28,8 @@ select > option {
   border-radius: 20px;
 }
 
-.form-control:focus{border-color: var(--hookers-green);  box-shadow: none; -webkit-box-shadow: none;} 
+.form-control:focus{border-color: var(--hookers-green);  box-shadow: none; -webkit-box-shadow: none; border-left: 0;} 
+.form-control:focus#searchInput{ border-right: 0;}
 .has-error .form-control:focus{box-shadow: none; -webkit-box-shadow: none;}
 
 

@@ -247,3 +247,43 @@ export async function getQta(codart, coddep){
 
 
 }
+
+export const toast = {
+
+  success(message, sound = true){
+    if ( sound ){
+      const audio = new Audio('public/sound/confirm.wav');
+      audio.play();
+    }
+    
+    Toastify({
+      text: message,
+      duration: 3000,
+      close: true,
+      gravity: "top", // `top` or `bottom`
+      position: "right", // `left`, `center` or `right`
+      stopOnFocus: true, // Prevents dismissing of toast on hover
+      style: {
+        background: "linear-gradient(to right, #52796fff, #354f52ff)",
+      },
+    }).showToast();
+  },
+  error(message, sound = true){
+    if ( sound ){
+      const audio = new Audio('public/sound/error.flac');
+      audio.play();
+    }
+    Toastify({
+      text: message,
+      duration: 3000,
+      close: true,
+      gravity: "top", // `top` or `bottom`
+      position: "right", // `left`, `center` or `right`
+      stopOnFocus: true, // Prevents dismissing of toast on hover
+      style: {
+        width: "900px !important",
+        background: "linear-gradient(to right, #ae2012ff, #9b2226ff)",
+      },
+    }).showToast();
+  }
+} 
