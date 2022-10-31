@@ -136,9 +136,7 @@ function getQta(string $codArt, string $mag){
 
     }
 
-
-
-    die( json_encode($message) );
+    echo json_encode($message);
 
   } catch (Exception $e) {
     $message['msg'] = $e->getMessage();
