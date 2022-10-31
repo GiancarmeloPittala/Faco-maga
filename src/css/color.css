@@ -22,3 +22,7 @@ body {
   background-color: var(--dark-sea-green);
 }
 
+.text-ash-gray{
+  color: var(--ash-gray);
+}
+

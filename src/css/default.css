@@ -1,3 +1,6 @@
+*{
+  font-family: 'Josefin Sans', sans-serif;
+}
 .w-6{
   width: 20px;
 }
@@ -35,4 +38,20 @@ select > option {
 
 .input-group{
   padding: 0;
+}
+
+.btn-outline-success{
+  border-width: 2px;
+  border-color: var(--hookers-green) !important;
+  color: white !important;
+
+}
+.btn-outline-success:hover{
+  background-color: var(--hookers-green) !important;
+  color: white !important;
+}
+
+input[disabled]{
+  cursor:not-allowed;
+  background: var(--charcoal) !important;
 }
