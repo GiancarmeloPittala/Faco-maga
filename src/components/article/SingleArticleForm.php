@@ -136,7 +136,7 @@
     initCategorieL5,
     initUnitMis,
     initMaga
-  } from './js/index.js';
+  } from './src/js/index.js';
 
   const codscoCli = document.getElementById('codscoCli');
   const codscoFornit = document.getElementById('codscoFornit');
@@ -186,16 +186,12 @@
           values[input.id] = input.checked;
         else values[input.id] = input.value;
       }
-      console.log( values )
       
-      const result = await (await fetch('php/gestione.php', { 
+      const result = await (await fetch('src/php/gestione.php', { 
         method: 'POST', 
         headers: { 'Content-Type': 'application/json'}, 
         body: JSON.stringify( { ...values, maga: window.localStorage.getItem('coddep')  }) 
       })).json()
-
-      console.log( result )
-
 
     }
   })()

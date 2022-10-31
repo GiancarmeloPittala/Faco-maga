@@ -46,7 +46,7 @@
     query,
     popolaArticleForm,
     getQta
-  } from './js/index.js';
+  } from './src/js/index.js';
 
   class SearchForm {
     constructor(id = '#searchForm') {

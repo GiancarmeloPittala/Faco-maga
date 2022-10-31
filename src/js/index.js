@@ -1,6 +1,6 @@
 const sleepTime = 0;
 export async function query(q) { 
-  return await (await fetch("php/q.php", {
+  return await (await fetch("src/php/q.php", {
     method: 'POST' ,
     headers: {
       'Content-Type': 'application/json',
