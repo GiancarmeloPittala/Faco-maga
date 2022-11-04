@@ -1,9 +1,10 @@
 <?php
 
-$servername = "localhost";
-$username = "root";
-$password = "ZY0R6hICLb$!O7Yl0b2w";
-$dbname = "aquilino";
+$env = parse_ini_file('../../config.ini', true)['DATABASE'];
+$servername = $env['DB_SERVERNAME'];
+$username = $env['DB_SURNAME'];
+$password = $env['DB_PASSWORD'];
+$dbname = $env['DB_NAME'];
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
