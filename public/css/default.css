@@ -33,7 +33,7 @@ select > option {
   border-radius: 20px;
 }
 
-.form-control:focus{border-color: var(--hookers-green);  box-shadow: none; -webkit-box-shadow: none; border-left: 0;} 
+.form-control:focus{border-color: var(--ash-gray);  box-shadow: none; -webkit-box-shadow: none; border-left: 0;} 
 .form-control:focus#searchInput{ border-right: 0;}
 .has-error .form-control:focus{box-shadow: none; -webkit-box-shadow: none;}
 
@@ -48,16 +48,20 @@ select > option {
 
 .btn-outline-success{
   border-width: 2px;
-  border-color: var(--hookers-green) !important;
+  border-color: var(--ash-gray) !important;
   color: white !important;
 
 }
 .btn-outline-success:hover{
-  background-color: var(--hookers-green) !important;
+  background-color: var(--dark-slate-gray) !important;
   color: white !important;
 }
 
 input[disabled]{
   cursor:not-allowed;
   background: var(--charcoal) !important;
+}
+
+.form-control.is-valid, .was-validated .form-control:valid {
+  border-color: var(--ash-gray);
 }

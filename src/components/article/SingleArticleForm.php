@@ -118,8 +118,8 @@
     </div>
   </div>
 
-  <div class="row justify-content-between align-items-sm-center  mt-4 gap-4">
-    <div class="col-lg p-0">
+  <div class="row justify-content-between align-items-sm-center  mt-4 g-4">
+    <div class="col-lg">
 
       <div class="d-flex gap-4 align-items-center text-white btn btn-outline-success">
         <input type="checkbox" id="check" name="check" class="w-6 h-6">
@@ -129,7 +129,7 @@
       </div>
 
     </div>
-    <div class="col-lg p-0 ">
+    <div class="col-lg ">
       <button type="submit" class=" w-100 btn btn-outline-success font-weight-bold">
         CONFERMA
       </button>

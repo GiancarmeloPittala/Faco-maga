@@ -19,15 +19,15 @@ body {
 }
 
 .bg-dark-sea-green{
-  background-color: var(--dark-sea-green);
+  background-color: var(--hookers-green);
 }
 .btn.btn-outline-dark-sea-green{
-  border-color: var(--dark-sea-green) !important;
-  color: var(--dark-sea-green) !important;
+  border-color: var(--hookers-green) !important;
+  color: var(--hookers-green) !important;
 }
 .btn.btn-outline-dark-sea-green:hover{
-  border-color: var(--dark-sea-green) !important;
-  background-color: var(--dark-sea-green) !important;
+  border-color: var(--hookers-green) !important;
+  background-color: var(--hookers-green) !important;
   color: white !important;
 }
 .text-ash-gray{
