@@ -260,8 +260,8 @@ export const toast = {
       text: message,
       duration: 3000,
       close: true,
-      gravity: "top", // `top` or `bottom`
-      position: "right", // `left`, `center` or `right`
+      gravity: "bottom", // `top` or `bottom`
+      position: "left", // `left`, `center` or `right`
       stopOnFocus: true, // Prevents dismissing of toast on hover
       style: {
         background: "linear-gradient(to right, #52796fff, #354f52ff)",
@@ -277,8 +277,8 @@ export const toast = {
       text: message,
       duration: 3000,
       close: true,
-      gravity: "top", // `top` or `bottom`
-      position: "right", // `left`, `center` or `right`
+      gravity: "bottom", // `top` or `bottom`
+      position: "left", // `left`, `center` or `right`
       stopOnFocus: true, // Prevents dismissing of toast on hover
       style: {
         width: "900px !important",
@@ -287,3 +287,62 @@ export const toast = {
     }).showToast();
   }
 } 
+
+export const OldProducts = {
+  get(){
+    let oldProductList = window.localStorage.getItem('oldProductList');
+    if ( oldProductList ) oldProductList = JSON.parse(oldProductList);
+    else oldProductList = [];
+    return oldProductList;
+  },
+
+  store(oldProductList){
+    window.localStorage.setItem('oldProductList', JSON.stringify(oldProductList) );
+  },
+
+  add(newElement){
+    const oldProductList = this.get();
+    const filteredItems = oldProductList.filter( p => p.id != newElement.id )
+    filteredItems.unshift(newElement)
+    this.store(filteredItems.slice(0,20))
+    
+  },
+  listShow(id) {
+    const oldProductList = this.get();
+    
+    const list = document.getElementById(id);
+
+    list.innerHTML = '';
+
+    //ciclo gli elementi e li mostro
+    for ( const product of oldProductList ){
+      list.innerHTML += `<div elementList class="list-group-item list-group-item-action">${product.codart}</div>`;
+    }
+    const cerca = async (event) => {
+
+      const cols = "a.ID, a.CODART, a.ARTMAS, a.DESC1, a.CODSCO1, a.CODSCO2, a.UNIMIS, a.PRE1, a.PRE2, PRE3, PRE4, PRE5";
+      
+      const data = await query(`Select ${cols}, ean from 01_anaart a left join 01_anaarte ae on a.ID = ae.idanaart where a.CODART = "${event.target.innerText}" limit 0, 10;`)
+ 
+      let article = data[0];
+
+      getQta(article.CODART, window.localStorage.getItem('coddep') )
+      const [ codbar, qta ] = await Promise.all([
+        query(`Select ID, EAN from 01_anaarte where idanaart = ${article.ID}; `),
+        getQta(article.CODART, window.localStorage.getItem('coddep') )
+      ]);
+
+      article.anaarte = codbar.map( cbar => cbar.EAN ).join(',');
+      article.qta = qta;
+
+      //aggiorno il form
+      popolaArticleForm(data[0])
+      modalOldProducts.toggle();
+    }
+
+    document.querySelectorAll('[elementList]').forEach( element => element.onclick = cerca )
+      
+    this.store(oldProductList)
+  
+  }
+}
