@@ -121,7 +121,7 @@ function getQta(string $codArt, string $mag){
     if ( $result['esiste'] == 0 ) creaArticolo($data);
     if ( $result['esiste'] == 1 ) { $rim_ret = "RET"; aggiornaArticolo($data); }
     $qta = getQta($data['codArticolo'], $data['maga']);
-    $message['msg'] .= "\n\nQuantità $data[qta], check => $data[check]. ";
+    $message['msg'] .= "\n\nQuantità $data[qta] ";
 
     if( $data['check'] == false && $data['qta'] != $qta ){
       

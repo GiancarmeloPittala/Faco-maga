@@ -20,7 +20,7 @@
 </head>
   <body>
     
-    <main class="container-xxl d-flex justify-content-center align-content-lg-center min-vh-100 py-3">
+    <main class="container-xxl d-flex justify-content-center align-items-xl-center min-vh-100 py-3">
       <div class=" d-flex flex-column gap-4">
         <div onclick=" document.querySelector('h1').classList.add('d-none') " class="text-center">
           <h1 >Gestione Magazzino Semplificata</h1>
