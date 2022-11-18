@@ -223,6 +223,7 @@
 
         articleForm.reset()
         articleForm.classList.remove('was-validated')
+        document.querySelector('input[type="search"]').focus();
         toast.success(result.msg)
 
       } catch (error) {
